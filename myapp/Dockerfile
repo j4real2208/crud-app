@@ -1,0 +1,27 @@
+# syntax=docker/dockerfile:1
+
+FROM golang:1.16-alpine
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN go build -o /docker-gs-ping
+RUN apk update && apk add curl
+
+
+
+EXPOSE 1323
+
+CMD [ "/docker-gs-ping" , curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Joe Smith"}' \
+  localhost:1323/users]
+
+
+
+
