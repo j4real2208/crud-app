@@ -17,10 +17,7 @@ RUN apk update && apk add curl
 
 EXPOSE 1323
 
-CMD [ "/docker-gs-ping" , curl -X POST \
-  -H 'Content-Type: application/json' \
-  -d '{"name":"Joe Smith"}' \
-  localhost:1323/users]
+CMD [ "/docker-gs-ping" ]
 
 
 
